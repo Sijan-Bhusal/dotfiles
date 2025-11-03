@@ -1,0 +1,36 @@
+#System Aliases
+alias du="sudo dnf upgrade -y"
+alias dr="sudo dnf autoremove"
+alias di="sudo dnf install"
+alias q="exit"
+alias c="clear"
+alias rr="rm -rf"
+alias cache="sudo dnf clean all"
+
+#Other Utilities
+alias bat="bat --theme=base16"
+# alias ff="fastfetch -c examples/12"
+alias nn="nvim"
+alias ff="fastfetch"
+alias fff="fastfetch --config hypr.jsonc"
+alias fa="pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -"
+#Git Aliases
+alias gc="git commit -c"
+alias lz="lazygit"
+#Tmux Aliases
+alias ta="tmux a -t"       #for attaching tmux session
+alias tr="tmux kill-session -t"
+alias tn="tmux new-session -s"
+alias tl="tmux ls"
+
+#Eza Aliases
+alias l="eza --no-filesize --grid --sort=type --color=always --icons=always --no-user -a "
+alias ls="eza --no-filesize --color=always --sort=type --icons=always --no-user"
+alias ll="eza --no-filesize --long --color=always --sort=type --icons=always --no-user -la "
+
+#Night-Light Aliases
+alias na="gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature"
+
+#Compiler Aliases
+alias mc="mcs -out:"
+alias pp="pulsemixer"

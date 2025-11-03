@@ -1,0 +1,14 @@
+filter limbo
+search-b-start limbo
+q
+help
+add
+h
+remove ~/Music
+toggle repeat
+repeat
+add /mnt/e43fed32-7e30-48a0-8085-7e26d5f0f336/Audio/
+live-filter 
+?
+bind repeat toggle
+add Music/

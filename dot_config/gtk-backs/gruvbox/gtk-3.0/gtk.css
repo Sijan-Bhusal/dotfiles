@@ -1,0 +1,63 @@
+@define-color destructive_bg_color #cc241d; /* Gruvbox Red */
+@define-color destructive_fg_color #000000; /* Black */
+@define-color success_bg_color #98971a; /* Gruvbox Green */
+@define-color success_fg_color #000000; /* Black */
+@define-color warning_bg_color #d79921; /* Gruvbox Yellow */
+@define-color warning_fg_color #282828; /* Gruvbox Background for contrast */
+@define-color error_bg_color #cc241d; /* Gruvbox Red */
+@define-color error_fg_color #000000; /* Black */
+@define-color accent_color oklab(from @accent_bg_color max(l, 0.85) a b);
+@define-color destructive_color oklab(from @destructive_bg_color max(l, 0.85) a b);
+@define-color success_color oklab(from @success_bg_color max(l, 0.85) a b);
+@define-color warning_color oklab(from @warning_bg_color max(l, 0.85) a b);
+@define-color error_color oklab(from @error_bg_color max(l, 0.85) a b);
+@define-color window_bg_color #282828; /* Gruvbox Background */
+@define-color window_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color view_bg_color #282828; /* Gruvbox Lighter Background */
+@define-color view_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color headerbar_bg_color #282828; /* Gruvbox Lighter Background */
+@define-color headerbar_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color headerbar_border_color #a89984; /* Gruvbox Gray */
+@define-color headerbar_backdrop_color @window_bg_color; /* Matches window background */
+@define-color headerbar_shade_color rgba(40, 40, 40, 0.36); /* Gruvbox Background with opacity */
+@define-color headerbar_darker_shade_color rgba(40, 40, 40, 0.90); /* Gruvbox Background with higher opacity */
+@define-color sidebar_bg_color #282828; /* Gruvbox Lighter Background */
+@define-color sidebar_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color sidebar_backdrop_color #282828; /* Gruvbox Background */
+@define-color sidebar_shade_color rgba(40, 40, 40, 0.25); /* Gruvbox Background with opacity */
+@define-color sidebar_border_color rgba(40, 40, 40, 0.36); /* Gruvbox Background with opacity */
+@define-color secondary_sidebar_bg_color #282828; /* Gruvbox Background */
+@define-color secondary_sidebar_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color secondary_sidebar_backdrop_color #3c3836; /* Gruvbox Lighter Background */
+@define-color secondary_sidebar_shade_color rgba(40, 40, 40, 0.25); /* Gruvbox Background with opacity */
+@define-color secondary_sidebar_border_color rgba(40, 40, 40, 0.36); /* Gruvbox Background with opacity */
+@define-color card_bg_color rgba(168, 153, 132, 0.08); /* Gruvbox Gray with low opacity */
+@define-color card_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color card_shade_color rgba(40, 40, 40, 0.36); /* Gruvbox Background with opacity */
+@define-color dialog_bg_color #3c3836; /* Gruvbox Lighter Background */
+@define-color dialog_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color popover_bg_color #3c3836; /* Gruvbox Lighter Background */
+@define-color popover_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color popover_shade_color rgba(40, 40, 40, 0.25); /* Gruvbox Background with opacity */
+@define-color thumbnail_bg_color #3c3836; /* Gruvbox Lighter Background */
+@define-color thumbnail_fg_color #ebdbb2; /* Gruvbox Foreground */
+@define-color shade_color rgba(40, 40, 40, 0.25); /* Gruvbox Background with opacity */
+@define-color scrollbar_outline_color rgba(40, 40, 40, 0.95); /* Gruvbox Background with high opacity */
+:root {
+--standalone-color-oklab: max(l, 0.85) a b;
+--accent-color: oklab(from #458588 var(--standalone-color-oklab)); /* Gruvbox Blue */
+--destructive-color: oklab(from #cc241d var(--standalone-color-oklab)); /* Gruvbox Red */
+--success-color: oklab(from #98971a var(--standalone-color-oklab)); /* Gruvbox Green */
+--warning-color: oklab(from #d79921 var(--standalone-color-oklab)); /* Gruvbox Yellow */
+--error-color: oklab(from #cc241d var(--standalone-color-oklab)); /* Gruvbox Red */
+--active-toggle-bg-color: rgba(168, 153, 132, 0.20); /* Gruvbox Gray with opacity */
+--active-toggle-fg-color: #000000; /* Black */
+--overview-bg-color: #282828; /* Gruvbox Background */
+--overview-fg-color: #ebdbb2; /* Gruvbox Foreground */
+}
+/* GTK 4.0 and libadwaita specific styles /
+@define-color accent_bg_color #458588; / Gruvbox Blue /
+@define-color accent_fg_color #000000; / Black */
+/* Ensure compatibility with GTK 3.0 */
+@import url("gtk-3.0/libadwaita.css");
+@import url("gtk-3.0/libadwaita-tweaks.css");
