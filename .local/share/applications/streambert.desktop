@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Streambert
+Comment=Streambert Application
+Exec=/home/sijan/.local/share/applications/Streambert-2.4.0.AppImage
+Icon=streambert
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true

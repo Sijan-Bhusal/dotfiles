@@ -1,0 +1,328 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+scan_timeout = 500
+command_timeout = 1000
+
+# ── AMOLED theme ──────────────────────────────────────────
+# bg=black   fg=#cdd6f4   blue=#89b4fa   mauve=#cba6f7
+# green=#a6e3a1   red=#f38ba8   dim=#6c7086   mute=#585b70
+
+format = """
+[](#6c7086)\
+$os\
+$username\
+[](#6c7086)\
+$directory \
+$git_branch\
+$git_status\
+$git_metrics\
+[](#6c7086)\
+$python\
+$nodejs\
+$rust\
+$golang\
+$bun\
+$deno\
+$java\
+$ruby\
+$php\
+$lua\
+$haskell\
+$scala\
+$elixir\
+$julia\
+$kotlin\
+$swift\
+$zig\
+$nim\
+$c\
+$cpp\
+$nix_shell\
+$conda\
+$docker_context\
+$time\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[>](bold #89b4fa)"
+error_symbol = "[✗](bold #f38ba8)"
+vicmd_symbol = "[<](bold #a6e3a1)"
+
+[directory]
+style = "bold #cdd6f4"
+format = "[$path]($style)[$read_only]($read_only_style)"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+read_only_style = "#f38ba8"
+read_only = " 󰌾"
+
+[git_branch]
+format = "[$symbol$branch]($style)"
+style = "#a6e3a1"
+symbol = " "
+
+[git_status]
+format = '[$all_status$ahead_behind]($style)'
+style = "#cba6f7"
+conflicted = "🏳"
+up_to_date = ""
+untracked = " "
+ahead = " ${count}"
+behind = " ${count}"
+staged = " "
+modified = " "
+renamed = " "
+deleted = " "
+stashed = " "
+
+[git_metrics]
+format = '([+$added]($added_style))([-$deleted]($deleted_style))'
+added_style = "#a6e3a1"
+deleted_style = "#f38ba8"
+only_nonzero_diffs = true
+
+[fill]
+style = "#585b70"
+
+[time]
+format = "[$time]($style)"
+time_format = "%H:%M"
+style = "#6c7086"
+
+[status]
+format = "[$symbol$status]($style)"
+style = "bg:#f38ba8"
+disabled = false
+
+[os]
+disabled = false
+style = "#6c7086"
+format = "[$symbol]($style)"
+
+[username]
+show_always = false
+style_user = "#cba6f7"
+style_root = "#f38ba8"
+format = "[$user]($style)"
+
+# ── Language modules ──────────────────────────────────────
+
+[python]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[nodejs]
+symbol = " "
+style = "#a6e3a1"
+format = "[$symbol( $version)]($style)"
+
+[rust]
+symbol = "󱘗 "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[golang]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[bun]
+symbol = " "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[deno]
+symbol = " "
+style = "#a6e3a1"
+format = "[$symbol( $version)]($style)"
+
+[java]
+symbol = " "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[kotlin]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[ruby]
+symbol = " "
+style = "#f38ba8"
+format = "[$symbol( $version)]($style)"
+
+[php]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[lua]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[haskell]
+symbol = " "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[scala]
+symbol = " "
+style = "#f38ba8"
+format = "[$symbol( $version)]($style)"
+
+[elixir]
+symbol = " "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[julia]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[swift]
+symbol = " "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[zig]
+symbol = " "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[nim]
+symbol = "󰆥 "
+style = "#cba6f7"
+format = "[$symbol( $version)]($style)"
+
+[c]
+symbol = " "
+style = "#6c7086"
+format = "[$symbol( $version)]($style)"
+
+[cpp]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol( $version)]($style)"
+
+[nix_shell]
+symbol = " "
+style = "#89b4fa"
+format = '[$symbol$state( \($name\))]($style)'
+
+[conda]
+symbol = " "
+style = "#a6e3a1"
+format = "[$symbol$environment]($style)"
+
+[docker_context]
+symbol = " "
+style = "#89b4fa"
+format = "[$symbol$context]($style)"
+
+# ── Icon-only overrides (preserved) ──────────────────────
+
+[aws]
+symbol = " "
+[buf]
+symbol = " "
+[cmake]
+symbol = " "
+[crystal]
+symbol = " "
+[dart]
+symbol = " "
+[elm]
+symbol = " "
+[fennel]
+symbol = " "
+[fortran]
+symbol = " "
+[fossil_branch]
+symbol = " "
+[gcloud]
+symbol = " "
+[gradle]
+symbol = " "
+[guix_shell]
+symbol = " "
+[haxe]
+symbol = " "
+[hg_branch]
+symbol = " "
+[hostname]
+ssh_symbol = " "
+[memory_usage]
+symbol = "󰍛 "
+[meson]
+symbol = "󰔷 "
+[ocaml]
+symbol = " "
+[package]
+symbol = "󰏗 "
+[perl]
+symbol = " "
+[pijul_channel]
+symbol = " "
+[pixi]
+symbol = "󰏗 "
+[rlang]
+symbol = "󰟔 "
+[xmake]
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+AOSC = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Elementary = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Ios = "󰀷 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+Zorin = " "

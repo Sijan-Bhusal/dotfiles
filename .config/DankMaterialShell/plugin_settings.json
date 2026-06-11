@@ -1,0 +1,28 @@
+{
+  "webSearch": {
+    "enabled": true,
+    "searchEngines": [],
+    "disabledEngines": [],
+    "trigger": ":"
+  },
+  "dmsLenovoBatterySettings": {
+    "enabled": true
+  },
+  "gitmojiLauncher": {
+    "enabled": false
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "pasteOnSelect": true,
+    "trigger": ";",
+    "recentEmojis": "✅,❌"
+  },
+  "claudeCodeUsage": {
+    "enabled": false
+  },
+  "openTrackerBar": {
+    "enabled": false,
+    "barProvider": "opencode",
+    "refreshInterval": "60000"
+  }
+}

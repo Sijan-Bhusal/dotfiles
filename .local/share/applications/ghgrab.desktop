@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ghgrab
+GenericName=GitHub Repo File Grabber
+Comment=Grab files from GitHub repositories
+StartupNotify=true
+TryExec=ghgrab
+Exec=kitty -e ghgrab
+Icon=/home/sijan/.local/share/applications/icons/ghgrab.png
+Categories=Utility;ConsoleOnly;Network;
+Terminal=false

@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# Ensure local directories exist
+ICON_DIR="$HOME/.local/share/applications/icons"
+APP_DIR="$HOME/.local/share/applications"
+mkdir -p "$ICON_DIR"
+mkdir -p "$APP_DIR"
+
+if [ "$#" -lt 3 ]; then
+  echo -e "\e[32mLet's create a new web app for Niri.\n\e[0m"
+  APP_NAME=$(gum input --prompt "Name> " --placeholder "My Web App")
+  APP_URL=$(gum input --prompt "URL> " --placeholder "https://example.com")
+  ICON_REF=$(gum input --prompt "Icon URL> " --placeholder "https://dashboardicons.com/")
+  CUSTOM_EXEC=""
+  MIME_TYPES=""
+  INTERACTIVE_MODE=true
+else
+  APP_NAME="$1"
+  APP_URL="$2"
+  ICON_REF="$3"
+  CUSTOM_EXEC="$4"
+  MIME_TYPES="$5"
+  INTERACTIVE_MODE=false
+fi
+
+if [[ -z "$APP_NAME" || -z "$APP_URL" || -z "$ICON_REF" ]]; then
+  echo "Error: Missing required arguments."
+  exit 1
+fi
+
+# Generate a safe filename (no spaces for the actual file)
+SAFE_NAME=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+
+# Handle Icon Download
+if [[ $ICON_REF =~ ^https?:// ]]; then
+  ICON_PATH="$ICON_DIR/$SAFE_NAME.png"
+  # -f makes curl fail on HTTP errors; -L follows redirects
+  if ! curl -sfL -o "$ICON_PATH" "$ICON_REF"; then
+    echo "Error: Failed to download icon from $ICON_REF"
+    exit 1
+  fi
+else
+  ICON_PATH="$ICON_DIR/$ICON_REF"
+fi
+
+# Define Exec Command
+# For Niri/Arch, you likely want to launch via a browser (Chrome/Brave/Firefox)
+if [[ -n "$CUSTOM_EXEC" ]]; then
+  EXEC_COMMAND="$CUSTOM_EXEC"
+else
+  # Default: Open in a new Chromium/Brave app window if installed, else xdg-open
+  if command -v brave &> /dev/null; then
+    EXEC_COMMAND="brave --app=$APP_URL"
+  elif command -v google-chrome-stable &> /dev/null; then
+    EXEC_COMMAND="google-chrome-stable --app=$APP_URL"
+  else
+    EXEC_COMMAND="xdg-open $APP_URL"
+  fi
+fi
+
+# Create .desktop file
+DESKTOP_FILE="$APP_DIR/$SAFE_NAME.desktop"
+
+cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=$APP_NAME
+Comment=Web Application
+Exec=$EXEC_COMMAND
+Terminal=false
+Type=Application
+Icon=$ICON_PATH
+Categories=WebApp;
+StartupNotify=true
+X-WebApp=true
+EOF
+
+if [[ -n "$MIME_TYPES" ]]; then
+  echo "MimeType=$MIME_TYPES" >> "$DESKTOP_FILE"
+fi
+
+chmod +x "$DESKTOP_FILE"
+
+if [[ $INTERACTIVE_MODE == true ]]; then
+  echo -e "\n\e[32mSuccess!\e[0m $APP_NAME is ready."
+  echo "Applicaton Installed"
+fi

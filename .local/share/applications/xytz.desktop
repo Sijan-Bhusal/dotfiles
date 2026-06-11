@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=xytz
+GenericName=YouTube Video Downloader
+Comment=Download YouTube videos from the terminal
+StartupNotify=true
+TryExec=xytz
+Exec=kitty -e xytz
+Icon=/home/sijan/.local/share/applications/icons/xytz.png
+Categories=Utility;ConsoleOnly;Network;
+Terminal=false
