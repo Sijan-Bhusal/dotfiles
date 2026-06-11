@@ -1,0 +1,35 @@
+{
+  "Daily Note": {
+    "prefix": "daily",
+    "description": "Insert a daily note template",
+    "body": [
+      "# ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "",
+      "## 🎯 Tasks",
+      "- [ ] ",
+      "",
+      "## 📝 Notes",
+      "",
+      "",
+      "## 💡 Ideas",
+      "",
+      "",
+      "## ✅ Done",
+      "- ",
+      "",
+      "## 📖 What I Learned",
+      "",
+      ""
+    ]
+  },
+  "Quick Task": {
+    "prefix": "task",
+    "description": "Insert a task checkbox",
+    "body": "- [ ] $0"
+  },
+  "Completed Task": {
+    "prefix": "done",
+    "description": "Insert a completed task",
+    "body": "- [x] $0"
+  }
+}
