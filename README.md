@@ -40,10 +40,29 @@ sudo mkinitcpio -P
 
 ### Limine bootloader
 
-Copy the limine config from this repo:
+Copy the limine config from this repo and update the PARTUUID:
 
 ```bash
+# Get your root partition UUID
+blkid /dev/sda2 -s PARTUUID -o value
+
+# Edit the placeholder in the repo file, then copy
 sudo cp ~/dotfiles/.config/system/limine.conf /boot/limine/limine.conf
+```
+
+### fstab
+
+Copy the fstab template and update the UUIDs:
+
+```bash
+# Get your partition UUIDs
+blkid /dev/sda1 -s UUID -o value   # boot
+blkid /dev/sda2 -s UUID -o value   # root
+blkid /dev/sdb  -s UUID -o value   # storage
+
+# Edit .config/system/fstab and replace each <CHANGE-ME-*> placeholder,
+# then copy to /etc/
+sudo cp ~/dotfiles/.config/system/fstab /etc/fstab
 ```
 
 ## Adding packages
