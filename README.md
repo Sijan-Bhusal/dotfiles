@@ -1,4 +1,4 @@
-# dotfiles — sijan
+# Personal Niri+Arch minimal setup
 
 <p align="center">
   <img src="screenshots/setup.png" alt="niri + DMS desktop setup" width="800">
