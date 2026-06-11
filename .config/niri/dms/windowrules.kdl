@@ -1,0 +1,6 @@
+// Open terminals in full screen
+// window-rule {
+//     match app-id="kitty"
+//     open-fullscreen true
+// }
+

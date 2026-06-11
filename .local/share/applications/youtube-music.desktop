@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Youtube Music
+Comment=Web Application
+Exec=brave --app=https://music.youtube.com/
+Terminal=false
+Type=Application
+Icon=/home/sijan/.local/share/applications/icons/youtube-music.png
+Categories=WebApp;
+StartupNotify=true
+X-WebApp=true
