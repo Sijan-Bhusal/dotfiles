@@ -1,0 +1,19 @@
+# Shell, terminal, and CLI tools
+fish
+tmux
+starship
+eza
+bat
+ripgrep
+fd
+fzf
+zoxide
+glow
+chafa
+fastfetch
+htop
+tree
+yazi
+micro
+gum
+pacman-contrib

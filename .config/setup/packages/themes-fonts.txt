@@ -1,0 +1,8 @@
+# Themes, icons, and fonts
+tela-circle-icon-theme-blue
+whitesur-icon-theme
+adw-gtk-theme
+noto-fonts-cjk
+noto-fonts-emoji
+gnu-free-fonts
+terminus-font

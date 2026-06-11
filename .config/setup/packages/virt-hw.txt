@@ -1,0 +1,14 @@
+# Virtualization and hardware tools
+qemu-desktop
+virt-manager
+libvirt
+docker
+docker-compose
+scrcpy
+ddcutil
+evtest
+blueman
+bluez
+bluez-utils
+intel-ucode
+vulkan-intel

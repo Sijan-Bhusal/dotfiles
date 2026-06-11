@@ -1,0 +1,15 @@
+# Media and creative tools
+mpv
+obs-studio
+audacity
+blanket
+cava
+termusic
+qbittorrent
+papers
+foliate
+imagemagick
+ffmpegthumbnailer
+gst-libav
+gst-plugin-pipewire
+gst-plugin-va

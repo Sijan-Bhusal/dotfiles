@@ -1,0 +1,13 @@
+# System utilities
+timeshift
+gnome-disk-utility
+pavucontrol
+qt5ct
+qt6ct
+nwg-look
+plymouth
+zram-generator
+nohang
+power-profiles-daemon
+gnome-keyring
+gnome-font-viewer

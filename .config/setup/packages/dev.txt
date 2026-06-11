@@ -1,0 +1,15 @@
+# Development tools
+neovim
+github-cli
+bun
+nodejs
+npm
+pnpm
+uv
+opencode
+python
+lazydocker
+lazygit
+fvm
+gdu
+ccache

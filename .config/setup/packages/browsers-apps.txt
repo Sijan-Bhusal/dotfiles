@@ -1,0 +1,11 @@
+# Browsers and desktop applications
+brave-bin
+qutebrowser
+vesktop-bin
+obsidian
+onlyoffice-bin
+localsend-bin
+ani-cli
+ghgrab-bin
+slides-bin
+peaclock
