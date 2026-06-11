@@ -1,5 +1,9 @@
 # dotfiles — sijan
 
+<p align="center">
+  <img src="screenshots/setup.png" alt="niri + DMS desktop setup" width="800">
+</p>
+
 Personal dotfiles for niri + DMS on Arch Linux.
 
 ## Fresh install workflow
