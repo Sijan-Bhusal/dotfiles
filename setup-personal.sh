@@ -10,6 +10,7 @@ REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 PACKAGES_DIR="$REPO_DIR/.config/setup/packages"
 BACKUP_SUFFIX=".dms-backup"
 AUR_HELPER=""
+SELECTED_PACKAGES=()
 
 log()  { printf "%b%s%b\n" "$GREEN" "==> $*" "$NC"; }
 warn() { printf "%b%s%b\n" "$YELLOW" "==> $*" "$NC"; }
@@ -92,7 +93,7 @@ select_categories() {
   log "Selected: ${SELECTED_CATEGORIES[*]}"
 }
 
-install_packages() {
+select_packages() {
   local category=$1
   local pkg_file="$PACKAGES_DIR/$category.txt"
 
@@ -102,15 +103,35 @@ install_packages() {
   fi
 
   local packages
-  packages=$(grep -v '^#' "$pkg_file" | grep -v '^$' | tr '\n' ' ')
+  packages=$(grep -v '^#' "$pkg_file" | grep -v '^$' || true)
 
   if [ -z "$packages" ]; then
     warn "No packages listed in $category"
     return
   fi
 
-  log "Installing $category packages..."
-  gum spin --title "Installing $category packages..." -- $AUR_HELPER -S --needed --noconfirm $packages
+  log "Selecting packages from $category..."
+  local choices
+  choices=$(echo "$packages" | gum choose --no-limit --header "Packages in $category (space to toggle, enter to confirm):" --cursor "> " --selected.foreground "#0f0")
+
+  if [ -z "$choices" ]; then
+    warn "No packages selected from $category."
+    return
+  fi
+
+  while IFS= read -r line; do
+    SELECTED_PACKAGES+=("$line")
+  done <<< "$choices"
+}
+
+install_packages() {
+  if [ ${#SELECTED_PACKAGES[@]} -eq 0 ]; then
+    warn "No packages to install."
+    return
+  fi
+
+  log "Installing selected packages..."
+  $AUR_HELPER -S --needed --noconfirm "${SELECTED_PACKAGES[@]}"
 }
 
 backup_config() {
@@ -200,8 +221,10 @@ main() {
   select_categories
 
   for cat in "${SELECTED_CATEGORIES[@]}"; do
-    install_packages "$cat"
+    select_packages "$cat"
   done
+
+  install_packages
 
   deploy_dotfiles
   post_install_hooks
