@@ -65,13 +65,25 @@ abbr -a ghp 'gh repo create --public (basename "$PWD") --source=. --description=
 # ┌──────────────────────────────────────┐
 # │ System & Package Management          │
 # └──────────────────────────────────────┘
+function __aur_helper --description "Detect available AUR helper"
+  command -q paru; and echo paru; and return
+  command -q yay; and echo yay; and return
+  echo paru
+end
+
 abbr -a update 'sudo pacman -Syu'
 abbr -a mp 'makepkg -si'
-abbr -a ss "paru -Slq | fzf --multi --preview 'paru -Sii {1}' --preview-window=down:75% | xargs -ro paru -S"
+function ss --description "Search and install AUR packages"
+  set -l aur (__aur_helper)
+  $aur -Slq | fzf --multi --preview "$aur -Sii {1}" --preview-window=down:75% | xargs -ro $aur -S
+end
 abbr -a ping 'ping -c 10'
 abbr -a pg 'ping -c 10 google.com'
 abbr -a cleanup 'sudo pacman -Rns (pacman -Qdtq)'
-abbr -a cleanc 'sudo pacman -Sc && paru -Sc'
+function cleanc --description "Clean pacman and AUR cache"
+  set -l aur (__aur_helper)
+  sudo pacman -Sc && $aur -Sc
+end
 abbr -a pacckeep 'sudo paccache -k 3'
 abbr -a pacclean 'sudo paccache -r'
 abbr -a paccleanall 'sudo paccache -r -c /var/cache/pacman/pkg -u'
@@ -88,7 +100,12 @@ alias tofish="chsh $USER -s /usr/bin/fish && echo 'Log out and log back in for c
 abbr -a bigfont "setfont ter-132b"
 abbr -a regfont "setfont default8x16"
 abbr -a last-updated 'grep -i "full system upgrade" /var/log/pacman.log | tail -n 1'
-abbr -a cache 'du -sh /var/cache/pacman/pkg .cache/yay'
+function cache --description "Show cache sizes"
+  set -l sizes /var/cache/pacman/pkg
+  test -d ~/.cache/paru; and set sizes $sizes ~/.cache/paru
+  test -d ~/.cache/yay; and set sizes $sizes ~/.cache/yay
+  du -sh $sizes
+end
 abbr -a pwreset 'faillock --reset --user vyrx'
 
 # ┌──────────────────────────────────────┐

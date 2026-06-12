@@ -11,3 +11,4 @@ nohang
 power-profiles-daemon
 gnome-keyring
 gnome-font-viewer
+ly

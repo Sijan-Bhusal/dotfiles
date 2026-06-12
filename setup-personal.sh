@@ -9,6 +9,7 @@ NC='\033[0m'
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 PACKAGES_DIR="$REPO_DIR/.config/setup/packages"
 BACKUP_SUFFIX=".dms-backup"
+AUR_HELPER=""
 
 log()  { printf "%b%s%b\n" "$GREEN" "==> $*" "$NC"; }
 warn() { printf "%b%s%b\n" "$YELLOW" "==> $*" "$NC"; }
@@ -19,11 +20,6 @@ preflight_check() {
 
   if [ "$(uname)" != "Linux" ]; then
     error "This script only supports Linux."
-    exit 1
-  fi
-
-  if ! command -v paru &>/dev/null; then
-    error "paru is not installed. Please install paru first."
     exit 1
   fi
 
@@ -43,6 +39,35 @@ preflight_check() {
   fi
 
   log "All pre-flight checks passed."
+}
+
+select_aur_helper() {
+  local choices
+  choices=$(printf "paru\nyay" | gum choose --header "Choose your AUR package manager:" --cursor "> " --selected.foreground "#0f0")
+
+  if [ -z "$choices" ]; then
+    warn "No selection made. Defaulting to paru."
+    AUR_HELPER="paru"
+  else
+    AUR_HELPER="$choices"
+  fi
+
+  log "AUR helper selected: $AUR_HELPER"
+}
+
+install_aur_helper() {
+  if command -v "$AUR_HELPER" &>/dev/null; then
+    log "$AUR_HELPER is already installed."
+    return
+  fi
+
+  log "$AUR_HELPER not found. Installing $AUR_HELPER..."
+  sudo pacman -S --needed base-devel
+  git clone "https://aur.archlinux.org/$AUR_HELPER.git"
+  cd "$AUR_HELPER"
+  makepkg -si
+  cd ..
+  rm -rf "$AUR_HELPER"
 }
 
 select_categories() {
@@ -85,7 +110,7 @@ install_packages() {
   fi
 
   log "Installing $category packages..."
-  gum spin --title "Installing $category packages..." -- paru -S --needed --noconfirm $packages
+  gum spin --title "Installing $category packages..." -- $AUR_HELPER -S --needed --noconfirm $packages
 }
 
 backup_config() {
@@ -138,7 +163,18 @@ post_install_hooks() {
     sudo systemctl enable --now systemd-zram-setup@zram0 2>/dev/null || warn "zram enable failed"
   fi
 
-  gum spin --title "Running system update..." -- paru -Syu --noconfirm
+  if command -v ly &>/dev/null; then
+    log "Setting up ly display manager..."
+    sudo mkdir -p /etc/ly
+    sudo cp "$HOME/.config/ly/config.ini" /etc/ly/config.ini 2>/dev/null || true
+    for dm in sddm lightdm gdm greetd; do
+      sudo systemctl disable "$dm" 2>/dev/null || true
+    done
+    sudo systemctl enable ly
+    sudo systemctl start ly
+  fi
+
+  gum spin --title "Running system update..." -- $AUR_HELPER -Syu --noconfirm
 }
 
 print_summary() {
@@ -159,6 +195,8 @@ print_summary() {
 
 main() {
   preflight_check
+  select_aur_helper
+  install_aur_helper
   select_categories
 
   for cat in "${SELECTED_CATEGORIES[@]}"; do
